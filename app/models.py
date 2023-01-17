@@ -47,3 +47,16 @@ class Student(Common):
             models.CheckConstraint(check=Q(home_group__gte='home'),name='home_group_gte_18')
         ]
 
+# Multiple table model inheritance
+
+# if you create credentails db two then automatically create data db one some fields which inheriate
+
+class One(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return self.name
+
+class two(One):
+    key = models.OneToOneField(One,on_delete=models.CASCADE, parent_link=True,primary_key=True) # parent link through id assign inheriate db id assign
+    clas = models.CharField(max_length=40)
